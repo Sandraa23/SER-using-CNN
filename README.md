@@ -1,10 +1,10 @@
-#  Speech Emotion Recognition using CNN
+# Speech Emotion Recognition using CNN
 
 **Binary Classification (Happy vs Sad) using RAVDESS + CREMA-D**
 
 ---
 
-##  Overview
+## Overview
 
 This project implements a **Speech Emotion Recognition (SER)** system using a **Convolutional Neural Network (CNN)** to classify emotions from audio signals.
 
@@ -12,7 +12,7 @@ The model performs **binary classification (Happy vs Sad)** and evaluates the im
 
 ---
 
-##  Objective
+## Objective
 
 * Build a CNN model for speech-based emotion classification
 * Convert audio signals into **Mel Spectrograms**
@@ -22,30 +22,30 @@ The model performs **binary classification (Happy vs Sad)** and evaluates the im
 
 ---
 
-##  Dataset
+## Dataset
 
 The model uses a **combination of two datasets**:
 
-* RAVDESS
-* CREMA-D
+* [RAVDESS Dataset](https://zenodo.org/record/1188976)
+* [CREMA-D Dataset](https://www.kaggle.com/datasets/ejlok1/cremad)
 
-###  Emotion Filtering
+### Emotion Filtering
 
 Only the following emotions are used:
 
 * Happy
 * Sad
 
-###  Label Mapping
+### Label Mapping
 
 * Happy → 0
 * Sad → 1
 
 ---
 
-##  Methodology
+## Methodology
 
-###  1. Audio Preprocessing
+### 1. Audio Preprocessing
 
 * Audio loaded using `librosa`
 * Standardized with:
@@ -58,7 +58,7 @@ Only the following emotions are used:
 
 ---
 
-###  2. Data Augmentation (Training Only)
+### 2. Data Augmentation (Training Only)
 
 Augmentation is applied **only to training data**:
 
@@ -83,7 +83,7 @@ Augmentation is applied **only to training data**:
 
 ---
 
-###  3. Train-Test Split
+### 3. Train-Test Split
 
 * Stratified split using `train_test_split`
 * Test size: **15%**
@@ -91,7 +91,7 @@ Augmentation is applied **only to training data**:
 
 ---
 
-###  4. Model Architecture (CNN)
+### 4. Model Architecture (CNN)
 
 The model consists of:
 
@@ -118,19 +118,19 @@ The model consists of:
 
 ---
 
-###  5. Activation Functions Compared
+### 5. Activation Functions Compared
 
 The same CNN architecture is trained using:
 
 * ReLU
 * Tanh
 * Leaky ReLU (α = 0.1)
-* GELU
+* GELU *(Best Performing)*
 * Swish
 
 ---
 
-###  6. Training Strategy
+### 6. Training Strategy
 
 * Optimizer: Adam
 * Learning rate: **0.0002**
@@ -146,6 +146,45 @@ The same CNN architecture is trained using:
 
 ---
 
+## Results & Analysis
+
+###  Activation Function Comparison
+
+![Comparison Graph](outputs/activation_comparision_graph.png)
+![Comparison Bar](outputs/activation_comparision_bar.png)
+
+---
+
+###  Overall Performance (All Models)
+
+![Confusion Matrices](outputs/confusion_matrices_all.png)
+
+---
+
+### Training Curves for Each Activation
+
+#### ReLU
+
+![ReLU](outputs/training_curves_relu.png)
+
+#### Tanh
+
+![Tanh](outputs/training_curves_tanh.png)
+
+#### Leaky ReLU
+
+![Leaky ReLU](outputs/training_curves_leaky-relu.png)
+
+#### GELU (Best Model)
+
+![GELU](outputs/training_curves_gelu.png)
+
+#### Swish
+
+![Swish](outputs/training_curves_swish.png)
+
+---
+
 ## Evaluation
 
 Each model is evaluated using:
@@ -157,19 +196,7 @@ Each model is evaluated using:
 
 ---
 
-##  Visualizations
-
-The project generates:
-
-* Confusion matrices for all activations
-* Training curves (accuracy & loss) for each model
-* Combined validation curves
-* Comparison table of all models
-* Bar chart comparing accuracy and loss
-
----
-
-##  How to Run
+## How to Run
 
 1. Clone the repository
 
@@ -183,19 +210,19 @@ git clone https://github.com/your-username/your-repo-name.git
 pip install -r requirements.txt
 ```
 
-3. Upload datasets to Google Drive:
+3. Download datasets from the links above and place them in:
 
 ```
 /content/drive/MyDrive/SER_Project/data/
 ```
 
-4. Update paths if needed in notebook
+4. Update dataset paths in the notebook if required
 
-5. Run the notebook in Jupyter or Google Colab
+5. Run using Jupyter Notebook or Google Colab
 
 ---
 
-##  Technologies Used
+## Technologies Used
 
 * Python
 * TensorFlow / Keras
@@ -208,17 +235,18 @@ pip install -r requirements.txt
 
 ---
 
-##  Key Highlights
+## Key Highlights
 
 * Binary classification: Happy vs Sad
 * Uses **Mel Spectrograms as CNN input**
 * Applies **multiple augmentation techniques**
 * Compares **5 activation functions in identical conditions**
-* Includes **full evaluation + visualization pipeline**
+* **GELU achieved the best overall performance**
+* Includes full evaluation and visualization pipeline
 
 ---
 
-##  Future Improvements
+## Future Improvements
 
 * Extend to multi-class emotion recognition
 * Use raw audio or spectrogram-based deep models
@@ -227,7 +255,7 @@ pip install -r requirements.txt
 
 ---
 
-##  Notes
+## Notes
 
 * Datasets are not included due to size constraints
 * Project uses **Google Drive paths (Colab-based setup)**
